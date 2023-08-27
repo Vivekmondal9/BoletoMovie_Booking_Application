@@ -3,6 +3,7 @@ import Footer from "../Navbar/Footer";
 import Navbar from "../Navbar/navbar";
 import { useEffect, useState } from "react";
 import { fetchWithToken } from "../API/interceptor";
+import Loading from "../Home/Loading";
 
 
 
@@ -97,7 +98,7 @@ function UserBookings() {
 
                 <h2>My Bookings</h2>
                 <hr />
-                {userBookings.map((booking) => (
+                {userBookings && userBookings.map((booking) => (
                     <div style={{ display: "flex", boxShadow: "2px 2px 5px black", width: "auto", height: "auto", alignItems: "center", justifyContent: "center" ,padding:"2em"}}>
                         <h2 key={booking.booking_id}>
                             Movie:{getMovieName(booking.movie)} <br />
@@ -108,6 +109,8 @@ function UserBookings() {
                         </h2>
                     </div>
                 ))}
+                {userBookings.length==0 &&
+                (<div className="loading"><Loading></Loading></div>)}
 
 
             </div>

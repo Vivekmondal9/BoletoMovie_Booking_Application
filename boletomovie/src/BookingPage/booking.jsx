@@ -4,6 +4,7 @@ import Footer from "../Navbar/Footer";
 import Navbar from "../Navbar/navbar";
 import { useEffect, useState } from "react";
 import { fetchWithToken } from "../API/interceptor";
+import Loading from "../Home/Loading";
 
 
 
@@ -109,6 +110,9 @@ function Bookingpage() {
                         <h2 style={{ color: "white", textShadow: "2px 2px 5px black" }}>Showtime: {t[0]["timing"]}</h2>
                     </div>
                 )}
+                {!movie && 
+                (<div className="loading"><Loading></Loading></div>)
+                }
                 <h3 style={{ color: "white", textShadow: "2px 2px 5px black" }}>Booked Seats</h3>
                 <div style={{ display: "flex", justifyContent: "center", marginTop: "20px", flexWrap: "wrap" }}>
                     {seatsbookedbyuser.length > 0 ? (
@@ -119,7 +123,7 @@ function Bookingpage() {
                             </div>
                         ))
                     ) : (
-                        <p style={{ color: "white" }}>No seats have been booked yet.</p>
+                        (<div className="loading"><Loading></Loading></div>)
                     )}
                 </div>
                 <p style={{ color: "white", textAlign: "center", marginTop: "20px" }}>

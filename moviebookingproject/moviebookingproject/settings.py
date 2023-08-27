@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-mgajvy^0**yi^8lt7b0@6sexd16x6n+29_mj2qk0k_*$_501rn
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -87,8 +87,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'movieBookingDatabase',
-        'HOST':'127.0.0.1',
-        'PORT':27017
+        'CLIENT':{'host':'mongodb+srv://vivekmondal9:vivekmondaL9@cluster0.gnjcyhv.mongodb.net/',
+                  'name':'movieBookingDatabase'
+                  }
+        # 'HOST':'127.0.0.1',
+        # 'PORT':27017
     }
 }
 

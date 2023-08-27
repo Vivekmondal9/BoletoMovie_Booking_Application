@@ -1,0 +1,11 @@
+
+.video-container {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+}
+
+.fullscreen-video {
+    width: 100%;
+    height: auto;
+}

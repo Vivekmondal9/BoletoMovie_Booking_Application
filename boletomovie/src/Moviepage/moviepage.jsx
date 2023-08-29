@@ -18,7 +18,7 @@ function Movie() {
     // Getting all the movies at starting 
     useEffect(() => {
         async function getMovies() {
-            await axios.get("http://127.0.0.1:8000/api/movies/?page=1")
+            await axios.get("http://0.0.0.0:8000/api/movies/?page=1")
                 .then((response) => {
 
                     setMovies(response.data)

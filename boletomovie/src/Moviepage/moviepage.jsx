@@ -18,7 +18,7 @@ function Movie() {
     // Getting all the movies at starting 
     useEffect(() => {
         async function getMovies() {
-            await axios.get("http://0.0.0.0:8000/api/movies/?page=1")
+            await axios.get("http://65.0.31.109:8000/api/movies/?page=1")
                 .then((response) => {
 
                     setMovies(response.data)
@@ -53,7 +53,7 @@ function Movie() {
     function click(event) {
 
         if (islanguage) {
-            axios("http://127.0.0.1:8000/api/movies/language/?language=" + language + "&page=" + event.target.id)
+            axios("http://65.0.31.109:8000/api/movies/language/?language=" + language + "&page=" + event.target.id)
                 .then((response) => {
                     console.log(response.data)
                     setMovies(response.data)
@@ -71,7 +71,7 @@ function Movie() {
         }
 
         else if (isgenre) {
-            axios("http://127.0.0.1:8000/api/movies/genre/?genre=" + genre + "&page=" + event.target.id)
+            axios("http://65.0.31.109:8000/api/movies/genre/?genre=" + genre + "&page=" + event.target.id)
                 .then((response) => {
                     console.log(response.data)
                     setMovies(response.data)
@@ -87,7 +87,7 @@ function Movie() {
 
         }
         else {
-            axios.get("http://127.0.0.1:8000/api/movies/?page=" + event.target.id)
+            axios.get("http://65.0.31.109:8000/api/movies/?page=" + event.target.id)
                 .then((response) => {
 
                     setMovies(response.data)
@@ -125,7 +125,7 @@ function Movie() {
             setGenre(event.target.value);
         }
 
-        axios("http://127.0.0.1:8000/api/movies/genre/?genre=" + event.target.value)
+        axios("http://65.0.31.109:8000/api/movies/genre/?genre=" + event.target.value)
             .then((response) => {
                 console.log(response.data)
                 setMovies(response.data)
@@ -156,7 +156,7 @@ function Movie() {
         // console.log(islanguage, language)
 
 
-        axios("http://127.0.0.1:8000/api/movies/language/?language=" + event.target.value)
+        axios("http://65.0.31.109:8000/api/movies/language/?language=" + event.target.value)
             .then((response) => {
                 console.log(response.data)
                 setMovies(response.data)
@@ -190,7 +190,7 @@ function Movie() {
     function movieSearch(event) {
         event.preventDefault();
         let val = document.getElementById("search").value;
-        axios.get("http://127.0.0.1:8000/api/movies/search/?search=" + val)
+        axios.get("http://65.0.31.109:8000/api/movies/search/?search=" + val)
             .then((response) => {
                 setMovies(response.data)
             },

@@ -14,10 +14,10 @@ import screen from "./screen.png"
 function TheaterSeats() {
     let nav=useNavigate()
     const params = useParams()
-    const [movies, setMovies] = useState()
-    const [theaters, setTheater] = useState()
+    const [movies, setMovies] = useState([])
+    const [theaters, setTheater] = useState([])
 
-    const [seats, setSeats] = useState();
+    const [seats, setSeats] = useState([]);
     const [selectedseat, setSelectedSeat] = useState([]);
     const [amount, setAmount] = useState([])
     let movie_id = params.movie_id;
@@ -117,7 +117,7 @@ function TheaterSeats() {
 
     function seatSelect(number, value) {
 
-        const seatExists = seats.some(seat => seat.number === number); // Check if selected seat number exists in the seats list
+        const seatExists = seats && seats.some(seat => seat.number === number); // Check if selected seat number exists in the seats list
     
         if (seatExists) {
             return;
@@ -178,7 +178,7 @@ function TheaterSeats() {
         .catch((error) => {
             console.log(error);
         });
-        console.log(selectedseat)
+        // console.log(selectedseat)
         if (selectedseat.length>0){
             setTimeout(()=>{
                 nav('/user/movie/'+movie_id+'/theater/'+theater_id+'/booking',true)
@@ -188,6 +188,9 @@ function TheaterSeats() {
         else{
             alert("You have Not select any seat!!")
         }
+
+        setAmount([...amount,[]])
+        setSeats([...selectedseat,[]])
     }
 
 

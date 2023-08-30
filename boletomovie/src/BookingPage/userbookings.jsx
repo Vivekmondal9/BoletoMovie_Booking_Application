@@ -12,7 +12,7 @@ import Loading from "../Home/Loading";
 function UserBookings() {
 
 
-    
+
 
 
     const [userBookings, setUserBookings] = useState([]);
@@ -21,16 +21,16 @@ function UserBookings() {
 
     useEffect(() => {
 
-        let access_token=localStorage.getItem('access_token')
+        let access_token = localStorage.getItem('access_token')
         async function fetchUserBookings() {
             try {
                 const response = await fetchWithToken("http://127.0.0.1:8000/api/user/bookings/",
-                {
-                    headers: {
-                        'Authorization': `Bearer ${access_token}`
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${access_token}`
+                        }
                     }
-                }
-                
+
                 );
                 if (response.ok) {
                     const data = await response.json();
@@ -47,7 +47,7 @@ function UserBookings() {
                 if (response.ok) {
                     const data = await response.json();
                     // console.log("Fetched movies data:", data);
-                    setMovies(data.movies); 
+                    setMovies(data.movies);
                 }
             } catch (error) {
                 console.log(error);
@@ -58,8 +58,7 @@ function UserBookings() {
                 const response = await fetchWithToken("http://127.0.0.1:8000/api/theaters/");
                 if (response.ok) {
                     const data = await response.json();
-                    console.log("Fetched movies data:", data);
-                    setTheaters(data); 
+                    setTheaters(data);
                 }
             } catch (error) {
                 console.log(error);
@@ -73,7 +72,7 @@ function UserBookings() {
 
 
 
-  
+
     const getMovieName = (movieId) => {
         const foundMovie = movies.find((movie) => movie.movie_id === movieId);
         return foundMovie ? foundMovie.title : "Unknown Movie";
@@ -90,7 +89,7 @@ function UserBookings() {
 
 
 
-    console.log(userBookings)
+
     return (
         <>
             <Navbar></Navbar>
@@ -98,19 +97,30 @@ function UserBookings() {
 
                 <h2>My Bookings</h2>
                 <hr />
-                {userBookings && userBookings.map((booking) => (
-                    <div style={{ display: "flex", boxShadow: "2px 2px 5px black", width: "auto", height: "auto", alignItems: "center", justifyContent: "center" ,padding:"2em"}}>
-                        <h2 key={booking.booking_id}>
-                            Movie:{getMovieName(booking.movie)} <br />
-                            Theater: {getTheaterName(booking.theater)}<br />
-                            Timing:{getTheaterTiming(booking.theater)}<br></br>
-                            Seats :{booking.seat_numbers}
-                            {/* Add more details as needed */}
-                        </h2>
-                    </div>
-                ))}
-                {userBookings.length==0 &&
-                (<div className="loading"><Loading></Loading></div>)}
+                {userBookings.length == 0 ?
+                    (<div className="loading"><Loading></Loading></div>)
+                    :
+                    (userBookings && userBookings.map((booking) => {
+                        const movieName = getMovieName(booking.movie);
+                        const theaterName = getTheaterName(booking.theater);
+
+                        if (movieName !== "Unknown Movie" && theaterName !== "Unknown Theater") {
+                            return (
+                                <div style={{ display: "flex", boxShadow: "2px 2px 5px black", width: "auto", height: "auto", alignItems: "center", justifyContent: "center", padding: "2em" }} key={booking.booking_id}>
+                                    <h2>
+                                        Movie: {movieName} <br />
+                                        Theater: {theaterName} <br />
+                                        Timing: {getTheaterTiming(booking.theater)} <br />
+                                        Seats: {booking.seat_numbers.join(",")}
+                                    </h2>
+                                </div>
+                            );
+                        }
+                        return (<div className="loading"><Loading></Loading></div>)
+                    }))
+                }
+
+
 
 
             </div>

@@ -29,7 +29,13 @@ function Navbar() {
         window.location.reload();
     }
     function myBookings() {
-        nav("user/bookings",true)
+        if(logged){
+            nav("/user/bookings")
+        }
+        else{
+            alert("You Need To Login First!")
+            nav('/login',true)
+        }
     }
     return (
         <nav className="navbar navbar-expand-lg navbar-light bg-light navbar">

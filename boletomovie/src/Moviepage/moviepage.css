@@ -1,7 +1,7 @@
 
 .card-img-top{
     cursor: pointer;
-    height: 30vh !important;
+    height: 10em !important;
     border-radius: 10% !important;
     box-shadow: 5px 5px 10px black;
     margin-bottom: 1em;

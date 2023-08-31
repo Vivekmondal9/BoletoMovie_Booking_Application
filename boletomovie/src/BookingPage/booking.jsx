@@ -37,7 +37,7 @@ function Bookingpage() {
     if (userbooking && userbooking.length > 0) {
         let finalbooking = userbooking.slice(-1);
         seatbooks = finalbooking[0]['seat_numbers'];
-        user=finalbooking[0]['user']
+        user = finalbooking[0]['user']
     }
 
     const [movie, setMovie] = useState()
@@ -110,8 +110,8 @@ function Bookingpage() {
                         <h2 style={{ color: "white", textShadow: "2px 2px 5px black" }}>Showtime: {t[0]["timing"]}</h2>
                     </div>
                 )}
-                {!movie && 
-                (<div className="loading"><Loading></Loading></div>)
+                {!movie &&
+                    (<div className="loading"><Loading></Loading></div>)
                 }
                 <h3 style={{ color: "white", textShadow: "2px 2px 5px black" }}>Booked Seats</h3>
                 <div style={{ display: "flex", justifyContent: "center", marginTop: "20px", flexWrap: "wrap" }}>
@@ -146,3 +146,5 @@ function Bookingpage() {
 
 
 export default Bookingpage;
+
+

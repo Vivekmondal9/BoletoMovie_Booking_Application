@@ -142,7 +142,7 @@ function Movie() {
 
     // Search movie by language
     function handleLanguageChange(event) {
-        console.log(event.target.value)
+        // console.log(event.target.value)
         if (event.target.value == "All") {
             setislanguage(false)
             setLanguage(event.target.value);
@@ -158,7 +158,7 @@ function Movie() {
 
         axios("http://127.0.0.1:8000/api/movies/language/?language=" + event.target.value)
             .then((response) => {
-                console.log(response.data)
+                // console.log(response.data)
                 setMovies(response.data)
             },
                 (error) => {

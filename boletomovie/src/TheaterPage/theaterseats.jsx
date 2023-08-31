@@ -197,7 +197,7 @@ function TheaterSeats() {
     return (
         <>
             <Navbar></Navbar>
-            <div className="container" style={{ justifyContent: "center", alignItems: "center" }}>
+            <div className="tcontainer" style={{ justifyContent: "center", alignItems: "center" }}>
                 <div className="col-md-12" style={{ height: "100vh", alignItems: "center", justifyContent: "center", width: "auto" }}>
                     {movie && movie.map((p, i) => (
                         <div className="movidetails">
@@ -220,7 +220,7 @@ function TheaterSeats() {
 
 
 
-                        <div className="container" >
+                        <div className="tcontainer" >
 
                             <ul class="showcase" style={{ color: "white" }} >
                                 <li>

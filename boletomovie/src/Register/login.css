@@ -67,3 +67,6 @@ label{
 .text-center{
     color: wheat;
 }
+.contanier{
+    display: block !important;
+}

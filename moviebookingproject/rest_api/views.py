@@ -130,8 +130,6 @@ class MovieBySearchView(APIView):
 
         movies = Movie.objects.filter(title__icontains=movieName)
 
-  
-
         serialized = MovieSerializer(movies, many=True).data
 
         return JsonResponse(
@@ -147,9 +145,9 @@ class MoviesByLanguageView(APIView):
     def get(self, request):
         lang = request.GET.get("language")
         page = request.GET.get("page")
-        allMovies=Movie.objects.all()
+        allMovies = Movie.objects.all()
         movies = Movie.objects.filter(language__icontains=lang)
-        
+
         if movies:
             paginator = Paginator(movies, 8)
             page_obj = paginator.get_page(page)
@@ -180,7 +178,6 @@ class MoviesByLanguageView(APIView):
                 },
                 safe=False,
             )
-
 
 
 class MoviesBygenreView(APIView):
@@ -189,9 +186,7 @@ class MoviesBygenreView(APIView):
         page = request.GET.get("page")
         movies = Movie.objects.filter(genre__icontains=genre)
 
-        allMovies=Movie.objects.all()
-
-
+        allMovies = Movie.objects.all()
 
         if movies:
             paginator = Paginator(movies, 8)
@@ -224,40 +219,35 @@ class MoviesBygenreView(APIView):
                 safe=False,
             )
 
-        
-
 
 class AllTheatersView(APIView):
     def get(self, request):
         theater = Theater.objects.all()
         serialized = TheaterSerializer(theater, many=True).data
         return JsonResponse(serialized, safe=False, status=status.HTTP_200_OK)
-    
+
 
 class MoviebyidView(APIView):
-    def get(self,request):
-        mid=request.GET.get('movie')
-    
-        movie=Movie.objects.filter(movie_id=mid)
-        serialized=MovieSerializer(movie,many=True).data
-        return JsonResponse({'movies':serialized},safe=False)    
+    def get(self, request):
+        mid = request.GET.get("movie")
+
+        movie = Movie.objects.filter(movie_id=mid)
+        serialized = MovieSerializer(movie, many=True).data
+        return JsonResponse({"movies": serialized}, safe=False)
 
 
 class TheaterbyidView(APIView):
-    def get(self,request):
-        tid=request.GET.get('theater')
-    
-        theater=Theater.objects.filter(theater_id=tid)
-        serialized=TheaterSerializer(theater,many=True).data
-        return JsonResponse({'theaters':serialized},safe=False)
-    
-      
+    def get(self, request):
+        tid = request.GET.get("theater")
 
-
+        theater = Theater.objects.filter(theater_id=tid)
+        serialized = TheaterSerializer(theater, many=True).data
+        return JsonResponse({"theaters": serialized}, safe=False)
 
 
 class TheaterForMovieView(APIView):
-    permission_classes=[IsAuthenticated]
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
         mv = request.GET.get("movie")
         page = request.GET.get("page")
@@ -308,7 +298,7 @@ class SeatSelectView(APIView):
         theater = request.GET.get("theater")
         seatn = request.GET.get("seat")
         price = request.GET.get("price")
-     
+
         seat = Seat.objects.filter(
             Q(number=seatn) & Q(movie=movie) & Q(theater=theater)
         )
@@ -338,12 +328,10 @@ class SeatSelectView(APIView):
         )
 
 
-
-
 class BookingView(APIView):
     def post(self, request):
         data = json.loads(request.body)
-        data['user'] = request.user.id
+        data["user"] = request.user.id
 
         serializer = BookingSerializer(data=data)
         if serializer.is_valid():
@@ -352,28 +340,27 @@ class BookingView(APIView):
         return JsonResponse(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-
-
 class UserBookingView(APIView):
     def get(self, request):
         user = request.user.id
-        theater=request.GET.get("theater")
-        movie=request.GET.get("movie")
+        theater = request.GET.get("theater")
+        movie = request.GET.get("movie")
 
-        bookings = Booking.objects.filter(Q(user_id=user) & Q(movie=movie) & Q(theater=theater))
+        bookings = Booking.objects.filter(
+            Q(user_id=user) & Q(movie=movie) & Q(theater=theater)
+        )
 
         serialized = BookingSerializer(bookings, many=True).data
 
         return JsonResponse(serialized, safe=False)
-    
+
 
 class UserAllBookingView(APIView):
-    def get(self,request):
-        user=request.user.id
+    def get(self, request):
+        user = request.user.id
 
-        bookings=Booking.objects.filter(user_id=user)
+        bookings = Booking.objects.filter(user_id=user)
 
-        serialized=BookingSerializer(bookings,many=True).data
+        serialized = BookingSerializer(bookings, many=True).data
 
-        return JsonResponse(serialized,safe=False)
-
+        return JsonResponse(serialized, safe=False)
